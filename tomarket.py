@@ -186,6 +186,14 @@ def main():
                             hours, remainder = divmod(remaining_time.total_seconds(), 3600)
                             minutes, _ = divmod(remainder, 60)
                             print(f"{Fore.GREEN+Style.BRIGHT}[ Farming ]: Started. Claim in: {int(hours)} jam {int(minutes)} menit {Style.RESET_ALL}", flush=True)
+                            if datetime.now() > end_time:
+                                    print(f"{Fore.YELLOW+Style.BRIGHT}[ Farming ]: Claiming.. {Style.RESET_ALL}", end="\r", flush=True)
+                                    claim_response, claim_status_code = claim_farming(token)
+                                    if claim_status_code == 200:
+                                        poin = claim_response["data"]["claim_this_time"]
+                                        print(f"{Fore.GREEN+Style.BRIGHT}[ Farming ]: Success Claim Farming! Reward: {poin} {Style.RESET_ALL}       ", flush=True)
+                                    else:
+                                        print(f"{Fore.RED+Style.BRIGHT}Failed to claim farming: {claim_response} {Style.RESET_ALL}          ", flush=True)
                         elif farming_status_code == 500:
                             if farming['message'] == 'game already started':
                                 end_time = datetime.fromtimestamp(farming['data']['end_at'])
