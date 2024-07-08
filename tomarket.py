@@ -263,7 +263,7 @@ def main():
                     else:
                         print(f"{Fore.GREEN+Style.BRIGHT}[ Farming ]: Error {farming} {Style.RESET_ALL}", flush=True)
                     
-                    while tiket > 1110:
+                    while tiket > 0:
                         print(f"{Fore.GREEN+Style.BRIGHT}[ Game ]: Starting Game..", end="\r", flush=True)
                         play, play_status = play_game(token)
                         if play_status != 200:
